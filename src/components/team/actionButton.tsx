@@ -25,6 +25,6 @@ export const InviteMemberButton = () => {
     }
 
     return (
-        <Button onClick={handleCreateTeam} className='flex gap-x-2'><Plus />Envite Member</Button>
+        <Button onClick={handleCreateTeam} className='flex gap-x-2'><Plus />Invite Member</Button>
     )
 };

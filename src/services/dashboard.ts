@@ -97,6 +97,11 @@ export const dashboardDataService = async (): Promise<{
 
         // this is use to calculate Team Data
         prisma.user.findMany({
+            where:{
+role:{
+    not:"admin"
+}
+            },
             select: {
                 name: true,
                 // image:true,

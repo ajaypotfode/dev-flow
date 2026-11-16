@@ -115,6 +115,11 @@ export const analyticsDataService = async (): Promise<{
 
 
         prisma.user.findMany({
+            where:{
+                role:{
+                    not:"admin"
+                }
+            },
             select: {
                 name: true,
                 // image:true,

@@ -1,14 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/src/components/ui/dialog';
 import { Label } from '@/src/components/ui/label';
 import { Input } from '@/src/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/src/components/ui/select';
 import { Button } from '@/src/components/ui/button';
-import { UserPlus, X } from 'lucide-react';
-import { Team, User, UserPayload } from '@/src/type/user';
+import { X } from 'lucide-react';
+import {  User } from '@/src/type/user';
 import { ModalComponentType } from '@/src/context/dynamicModal';
-import apiClient from '@/src/axios/axios';
 import { updateTeamMemberAction } from '@/src/features/team/action';
 import { useRouter } from 'next/navigation';
 
@@ -28,6 +26,7 @@ const UpdateMemberForm: React.FC<ModalComponentType<Result, UpdateFormProps>> = 
         email: member.email,
         role: member.role,
         status: member.status,
+        phone: String(member.phone)
         // image:""
     });
     const router = useRouter();
@@ -43,7 +42,8 @@ const UpdateMemberForm: React.FC<ModalComponentType<Result, UpdateFormProps>> = 
             inviteForm.name.trim() !== "" &&
             inviteForm.email.trim() !== "" &&
             inviteForm.role !== "" &&
-            inviteForm.status !== ""
+            inviteForm.status !== "" &&
+            inviteForm.phone !== ""
 
         if (!isValid) {
             // show error
@@ -57,7 +57,8 @@ const UpdateMemberForm: React.FC<ModalComponentType<Result, UpdateFormProps>> = 
             email: inviteForm.email,
             role: inviteForm.role,
             image: '',
-            status: inviteForm.status
+            status: inviteForm.status,
+            phone: inviteForm.phone
         }
         // console.log("project color  :", payload);
         setLoading(true);
@@ -102,16 +103,20 @@ const UpdateMemberForm: React.FC<ModalComponentType<Result, UpdateFormProps>> = 
                         <Input type="email" placeholder="jane@company.com" value={inviteForm.email}
                             onChange={e => setInviteForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
+                    <div className="space-y-1.5">
+                        <Label>Phone <span className="text-destructive">*</span></Label>
+                        <Input placeholder="Enter Phone" value={inviteForm.phone}
+                            onChange={e => setInviteForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-1.5">
                             <Label>Role</Label>
                             <Select value={inviteForm.role} onValueChange={v => setInviteForm(f => ({ ...f, role: v }))}>
                                 <SelectTrigger><SelectValue placeholder="Select Role" /></SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="owner">Owner</SelectItem>
                                     <SelectItem value="admin">Admin</SelectItem>
                                     <SelectItem value="member">Member</SelectItem>
-                                    <SelectItem value="viewer">Viewer</SelectItem>
+                                    <SelectItem value="leader">Leader</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
@@ -121,8 +126,8 @@ const UpdateMemberForm: React.FC<ModalComponentType<Result, UpdateFormProps>> = 
                                 <SelectTrigger><SelectValue placeholder="Select Status" /></SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="active">Active</SelectItem>
-                                    <SelectItem value="away">Away</SelectItem>
-                                    <SelectItem value="offline">Offline</SelectItem>
+                                    <SelectItem value="blocked">Blocked</SelectItem>
+                                    {/* <SelectItem value="offline">Offline</SelectItem> */}
                                 </SelectContent>
                             </Select>
                         </div>

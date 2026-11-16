@@ -91,8 +91,6 @@ const AddTaskForm: React.FC<ModalComponentType<Result, null>> = ({ close }) => {
     const submitTask = async (e: React.SubmitEvent) => {
         e.preventDefault();
 
-        console.log("due date Is : ", taskForm.dueDate);
-
         const isValid =
             taskForm.title.trim() !== "" &&
             taskForm.description.trim() !== "" &&

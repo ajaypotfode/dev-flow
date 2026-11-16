@@ -133,7 +133,7 @@ const ProjectsMembersForm: React.FC<ModalComponentType<Result, ProjectsMembersFo
             shadow-lg z-10 max-w-sm w-full">
                 <div className="flex justify-between items-center">
                     <h3 className="text-foreground text-xl font-bold mb-2">
-                        Add Project
+                        Add Members
                     </h3>
                     <button onClick={() => close({ isError: true, })}>
                         <X className="w-6 h-6 drop-shadow
@@ -144,8 +144,8 @@ const ProjectsMembersForm: React.FC<ModalComponentType<Result, ProjectsMembersFo
                     {/* Current members */}
                     <div>
                         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                            {/* Current Members ({(projectMembers ?? []).length}) */}
-                            Current Members 7
+                            Current Members ({(projectMembers ?? []).length})
+                            {/* Current Members 7 */}
                         </p>
                         {membersLoading ? (
                             <div className="space-y-2">{[0, 1].map(i => <Skeleton key={i} className="h-10" />)}</div>

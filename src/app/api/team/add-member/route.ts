@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest) => {
         //     )
         // }
 
-        const { name, email, password, role, image, status } = body
+        const { name, email, password, role, image, status,phone } = body
         const existingUser = await prisma.user.findFirst({
             where: {
                 email: email
@@ -40,7 +40,8 @@ export const POST = async (req: NextRequest) => {
                 password: hashedPassword,
                 role,
                 status,
-                image
+                image,
+                phone
             },
            include: {
                 tasks: {

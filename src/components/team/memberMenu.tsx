@@ -64,7 +64,8 @@ const MemberMenu = ({ member }: MemberMenuProps) => {
                         email: member.email,
                         role: member.role,
                         status: member.status,
-                        image: member.image
+                        image: member.image,
+                        phone:member.phone
                     })}
                 >
                     <Pencil className="h-4 w-4 mr-2" />Edit Project

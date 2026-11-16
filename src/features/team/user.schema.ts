@@ -8,6 +8,14 @@ export const createUserSchema = z.object({
             message: 'Name should be at least 2 characters',
         }),
 
+    phone: z
+        .string()
+        .min(1, { message: "Phone Number is required" })
+        .length(10, { message: "Phone should be exactly 10 digits" })
+        .regex(/^[0-9]+$/, {
+            message: "Phone should contain only digits",
+        }),
+
     email: z
         .string({ error: 'Email is required', })
         .regex(
@@ -28,10 +36,10 @@ export const createUserSchema = z.object({
     //     ),
 
     status: z.enum(
-        ['active', 'blocked', 'offline'],
+        ['active', 'blocked'],
         {
             message:
-                "Status must be 'active', 'blocked', or 'offline'",
+                "Status must be 'active', 'blocked'",
         }
     ),
 

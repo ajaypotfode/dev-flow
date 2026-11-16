@@ -3,19 +3,20 @@ export interface User {
     email: string
     // password: string
     role: string
-    image: string|null;
-    status: string
+    image: string | null;
+    status: string;
+    phone:string
 }
 
 export interface UserPayload {
     name: string
     email: string
     role: string
-    phone?:string;
+    phone: string;
     image?: string
     status: string
-    password?:string;
-    id?:string;
+    password?: string;
+    id?: string;
 }
 
 export interface Progress {
@@ -29,6 +30,7 @@ export interface Team {
     id: string;
     name: string;
     email: string;
+    phone:string;
     // password: string;
     role: string;
     status: string;

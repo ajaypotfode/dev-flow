@@ -41,7 +41,8 @@ const AddMemberForm: React.FC<ModalComponentType<Result, null>> = ({ close }) =>
             inviteForm.name.trim() !== "" &&
             inviteForm.email.trim() !== "" &&
             inviteForm.role !== "" &&
-            inviteForm.status !== ""
+            inviteForm.status !== "" &&
+            inviteForm.phone !== ""
 
         if (!isValid) {
             // show error
@@ -52,7 +53,7 @@ const AddMemberForm: React.FC<ModalComponentType<Result, null>> = ({ close }) =>
         const payload = {
             name: inviteForm.name,
             email: inviteForm.email,
-            password: 'Test@123',
+            // password: 'Test@123',
             role: inviteForm.role,
             image: '',
             status: inviteForm.status,
@@ -116,10 +117,9 @@ const AddMemberForm: React.FC<ModalComponentType<Result, null>> = ({ close }) =>
                             <Select value={inviteForm.role} onValueChange={v => setInviteForm(f => ({ ...f, role: v }))}>
                                 <SelectTrigger><SelectValue placeholder="Select Role" /></SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="owner">Owner</SelectItem>
                                     <SelectItem value="admin">Admin</SelectItem>
                                     <SelectItem value="member">Member</SelectItem>
-                                    <SelectItem value="viewer">Viewer</SelectItem>
+                                    <SelectItem value="leader">Leader</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
@@ -129,8 +129,8 @@ const AddMemberForm: React.FC<ModalComponentType<Result, null>> = ({ close }) =>
                                 <SelectTrigger><SelectValue placeholder="Select Status" /></SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="active">Active</SelectItem>
-                                    <SelectItem value="away">Away</SelectItem>
-                                    <SelectItem value="offline">Offline</SelectItem>
+                                    <SelectItem value="blocked">Blocked</SelectItem>
+                                    {/* <SelectItem value="offline">Offline</SelectItem> */}
                                 </SelectContent>
                             </Select>
                         </div>

@@ -1,6 +1,7 @@
 import { hash } from "bcrypt";
 import prisma from "../lib/prisma";
 import { UserPayload } from "../type/user";
+import { generatePassword } from "../helpers/api/generatePassword";
 
 export const getTeamListService = async () => {
     const users = await prisma.user.findMany({
@@ -96,10 +97,10 @@ export const addUserService = async (userPayload: UserPayload) => {
         throw new Error("User Is Already Exist");
     }
 
+    const newpassword = generatePassword(name, phone);
 
-    const stringPass = name.split(" ").join("").slice(0, 4).toLowerCase();
-    const lastFourString = phone?.slice(phone.length - 4, phone.length);
-    const newpassword = `${stringPass}@${lastFourString}`
+    console.log("new passwrd :", newpassword);
+
 
     const hashedPassword = await hash(newpassword ?? "", 10)
 
@@ -107,10 +108,12 @@ export const addUserService = async (userPayload: UserPayload) => {
         data: {
             name,
             email,
+            phone,
             password: hashedPassword,
             role,
             status,
-            image
+            image,
+
         },
         include: {
             tasks: {
@@ -149,7 +152,15 @@ export const addUserService = async (userPayload: UserPayload) => {
 
 export const updateUserService = async (userPayload: UserPayload) => {
 
-    const { name, email, role, image, status, id } = userPayload;
+    const { name, email, phone, role, image, status, id } = userPayload;
+
+    const newpassword = generatePassword(name, phone);
+
+    console.log("new passwrd :", newpassword);
+
+
+    const hashedPassword = await hash(newpassword ?? "", 10)
+
     const updatedUser = await prisma.user.update({
         where: {
             id
@@ -157,9 +168,12 @@ export const updateUserService = async (userPayload: UserPayload) => {
         data: {
             name,
             email,
+            phone,
+            password: hashedPassword,
             role,
             image,
             status,
+
 
         },
         include: {
