@@ -186,6 +186,22 @@ export const deleteTaskService = async (id: string) => {
     const deletedTask = await prisma.task.delete({
         where: {
             id: id
+        },
+        include: {
+            member: {
+                select: {
+                    name: true,
+                    id: true,
+                    role: true,
+                    // image:true
+                }
+            },
+            project: {
+                select: {
+                    id: true,
+                    title: true,
+                }
+            }
         }
     });
 

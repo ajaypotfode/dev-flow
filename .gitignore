@@ -41,7 +41,7 @@ demo.js
 next-env.d.ts
 
 # generated files
-/src/prisma/generated
+# /src/prisma/generated
 
 # migration folder
 /src/prisma/migrations

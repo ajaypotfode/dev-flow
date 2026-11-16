@@ -7,10 +7,10 @@ import { requireSession } from "@/src/lib/require_session";
 // import { addMembersService, createProjectService, deleteProjectService, updateProjectService, updateStatusService } from "@/src/services/projects";
 import { revalidatePath } from "next/cache";
 import { isMissingRelationError } from "@/src/lib/prisma-errors";
-import { TaskPayload } from "@/src/type/task";
+import { Task, TaskPayload } from "@/src/type/task";
 import { taskValidation } from "./task.schema";
 import { createtaskService, deleteTaskService, updateTaskService, updateTaskStatusService } from "@/src/services/tasks";
-import { Task } from "@/src/prisma/generated/client";
+
 
 export const createTaskAction = async (taskData: TaskPayload):
     Promise<{ error?: string, task?: Task }> => {
