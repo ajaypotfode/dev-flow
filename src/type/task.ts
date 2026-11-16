@@ -36,7 +36,7 @@ export interface Task {
         name: string;
         // email: string;
         role: string;
-        // image:string|null;
+        image?:string|null;
     };
     project: {
         id: string;
